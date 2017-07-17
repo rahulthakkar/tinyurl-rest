@@ -94,7 +94,7 @@ public class TinyURLClientServlet extends HttpServlet {
 		String longURL = request.getParameter("longURL");
 		if (longURL == null || longURL.trim().isEmpty() || longURL.trim().length() > Constants.URL_MAX_LENGTH) {
 			writer.append("LongURL length should be greater than zero and less than " + Constants.URL_MAX_LENGTH);
-		} else if (!urlValidator.isValid(longURL) || !urlValidator.isValid(Constants.HTTP_PROTOCOL + longURL)) {
+		} else if (!urlValidator.isValid(longURL) && !urlValidator.isValid(Constants.HTTP_PROTOCOL + longURL)) {
 			writer.append(longURL.trim() + " is not a valid URL.");
 		} else {
 			longURL = longURL.trim();
@@ -106,8 +106,8 @@ public class TinyURLClientServlet extends HttpServlet {
 			if (Response.Status.Family.SUCCESSFUL == Response.Status.Family.familyOf(serverResponse.getStatus())) {
 				URLModel urlModel = serverResponse.readEntity(URLModel.class);
 
-				String anchor = "<a href='http://tinyurl.com/" + urlModel.getShortURLHash() + "'>"
-						+ urlModel.getShortURLHash() + "</a>";
+				String anchor = "<a href='#'>"
+						+ "http://tinyurl.com/" + urlModel.getShortURLHash() + "</a>";
 				writer.append("tinyURL for " + urlModel.getLongURL()).append(" is: " + anchor);
 			} else {
 				ErrorMessageModel errorMessage = serverResponse.readEntity(ErrorMessageModel.class);

@@ -30,6 +30,7 @@ public class URLDao {
 			statement.close();
 		} catch (SQLException ex) {
 			LOGGER.log(Level.SEVERE, ex.toString(), ex);
+			statement.close();
 			throw ex;
 		}
 		return false;
@@ -40,22 +41,28 @@ public class URLDao {
 		Connection connection = DBConnection.getConnection();
 		PreparedStatement statement = null;
 		URLModel urlModel = null;
+		ResultSet resultSet = null;
 		try {
 			statement = connection.prepareStatement(Constants.GET_URL_SQL);
 			statement.setString(1, hashStr);
-			ResultSet resultSet = statement.executeQuery();
+			resultSet = statement.executeQuery();
 			
 			if(resultSet.next()) {
 				urlModel = new URLModel(resultSet.getString("hash"), resultSet.getString("long_url"));
 				if(Constants.BLACKLIST.equals(urlModel.getLongURL())) {
 					LOGGER.log(Level.INFO,"Block listed hash {0} access request", hashStr);
-					//TODO
+					resultSet.close();
+					statement.close();
 					return null;
 				}
 			}
+			resultSet.close();
 			statement.close();
+			
 		} catch (SQLException ex) {
 			LOGGER.log(Level.SEVERE, ex.toString(), ex);
+			resultSet.close();
+			statement.close();
 			throw ex;
 		}
 		
@@ -78,6 +85,7 @@ public class URLDao {
 			}
 		} catch (SQLException ex) {
 			LOGGER.log(Level.SEVERE, ex.toString(), ex);
+			statement.close();
 			throw ex;
 		}
 		return false;
