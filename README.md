@@ -21,7 +21,8 @@ TinyURL (URL shortener) like REST web-service with Java (JAX-RS) using Jersey
 ---
 * JAX-RS jersey implementation is used for RESTful web service implementation
 * There is no use of any ORM framework: could be extended
-* Data is store in a sqlite db (it’s embedded so easier to pass a db file for this kind of small project: obviously not suitable for real life application)
+* Data is store in a sqlite db (it’s embedded so easier to pass a db file for this kind of small project: obviously not suitable for real life application) 
+* I have added an index on tinyurl hash column in database for faster lookup
 * Could be extended to use RDBMS DB like MySQL for real concurrency.  Sharding (using consistent hashing) can be used for scaling out
 * Could also be extended to use HBase(would also help in terms of redundancy) like NoSQL DB for large traffic
 * Most probably the  system will be read heavy: should be extended to take benefit of Locality of Reference via caching (internal application caching or Redis like in-memory data store) – have to be careful when blacklisting URLs 

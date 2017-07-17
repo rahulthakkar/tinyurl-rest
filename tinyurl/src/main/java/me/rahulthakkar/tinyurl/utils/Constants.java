@@ -4,9 +4,13 @@ public class Constants {
 	public final static int URL_MAX_LENGTH = 2048;
 	public final static String HTTP_PROTOCOL = "http://";
 	public static final String DB_DRIVER = "org.sqlite.JDBC";
+	
 	// public static final String CONNECTION_STR =
 	// "jdbc:sqlite:${catalina.base}/webapps/tinyurl/WEB-INF/classes/tinyurl.sqlite";
-	public static final String CONNECTION_STR = "jdbc:sqlite:src/main/resources/tinyurl.sqlite";
+	
+	private static final String DB_PATH = "C:/dev/logicmonitor/tinyurl.sqlite";
+	
+	public static final String CONNECTION_STR = "jdbc:sqlite:"+DB_PATH;
 	
 	public static final int HASH_LENGTH = 7;
 	public static final int TOTAL_DIGITS = 10;

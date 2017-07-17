@@ -14,14 +14,14 @@
 	</form>
 	<br/><br/>
 	<form action="TinyURLClientServlet" method="get">
-		<b>Enter the tinyURL hash:</b><br/>
+		<b>Enter the tinyURL hash get longURL:</b><br/>
 		http://tinyurl.com/
 		<input type="text" name="shortGetURLHash"></input>
 		<input type="submit" value="Get LongURL!">
 	</form>
 	<form action="TinyURLClientServlet" method="post">
 	 	<input type="hidden" name="action" value="delete"/>
-		<b>Enter the tinyURL hash:</b><br/>
+		<b>Enter the tinyURL hash to Blocklist:</b><br/>
 		http://tinyurl.com/
 		<input type="text" name="shortDeleteURLHash"></input>
 		<input type="submit" value="Blocklist TinyURL!">
